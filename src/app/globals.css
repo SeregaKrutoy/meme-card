@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #07050e;
+  --color-ink: #100b1e;
+  --color-panel: #191233;
+  --color-card: #1e1740;
+  --color-hot: #ff2e88;
+  --color-grape: #8b5cf6;
+  --color-aqua: #22d3ee;
+  --color-gold: #fbbf24;
+  --color-lime: #a3e635;
+
+  --font-sans: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-slow: float 13s ease-in-out infinite;
+  --animate-pop: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-rise: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shine: shine 2.6s linear infinite;
+  --animate-wiggle: wiggle 4s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 1.8s ease-out infinite;
+  --animate-spin-slow: spin 9s linear infinite;
+  --animate-confetti: confetti 3.4s linear forwards;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) scale(1.04);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -180% 0;
+  }
+  100% {
+    background-position: 180% 0;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-40px) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(460px) rotate(520deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 46, 136, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(255, 46, 136, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 46, 136, 0);
+  }
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-void);
+  color: #f5f3ff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Фоновая «туманность» */
+.nebula {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nebula::before,
+.nebula::after {
+  content: "";
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+
+.nebula::before {
+  top: -12vw;
+  left: -10vw;
+  background: radial-gradient(circle, #ff2e88 0%, transparent 68%);
+  animation: var(--animate-float);
+}
+
+.nebula::after {
+  bottom: -16vw;
+  right: -12vw;
+  background: radial-gradient(circle, #22d3ee 0%, transparent 68%);
+  animation: var(--animate-float-slow);
+}
+
+.nebula-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(139, 92, 246, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.07) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 78%);
+}
+
+/* Карточная текстура */
+.card-face {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.14) 0%, transparent 60%),
+    linear-gradient(160deg, #2a1b56 0%, #170f30 55%, #120b26 100%);
+}
+
+.card-situation {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.16) 0%, transparent 55%),
+    linear-gradient(165deg, #2b2b33 0%, #14141a 60%, #0c0c11 100%);
+}
+
+.shine-text {
+  background: linear-gradient(
+    100deg,
+    #ff2e88 0%,
+    #fbbf24 25%,
+    #22d3ee 50%,
+    #a3e635 75%,
+    #ff2e88 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shine);
+}
+
+.glass {
+  background: rgba(25, 18, 51, 0.62);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
